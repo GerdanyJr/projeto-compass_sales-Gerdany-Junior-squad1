@@ -7,6 +7,7 @@ import { InputField } from "../components/Login/InputField";
 import { RedirectButton } from "../components/Login/RedirectButton";
 import { SubmitButton } from "../components/Login/SubmitButton";
 import { Input } from "../types/interfaces/Input";
+import { SocialMedia } from "../components/Login/SocialMedia";
 
 
 export function SignUp({ navigation }: { navigation: any }) {
@@ -35,8 +36,8 @@ export function SignUp({ navigation }: { navigation: any }) {
         });
     }
 
-    async function handleGoogleLogin() {
-    }
+    async function handleGoogleLogin() {}
+    async function handleFacebookLogin() {}
 
     return (
         <View style={styles.container}>
@@ -114,6 +115,11 @@ export function SignUp({ navigation }: { navigation: any }) {
                 title="Sign up"
                 onPress={handleSubmit(handleSubmitButton)}
                 style={styles.submitButton}
+            />
+            <SocialMedia
+                title="or a social account"
+                onFacebookPress={handleFacebookLogin}
+                onGooglePress={handleGoogleLogin}
             />
         </View>
     )
