@@ -3,6 +3,7 @@ import { View, StyleSheet, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SignUp } from './src/screens/SignUp';
+import { Login } from './src/screens/Login';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,7 @@ function AuthenticateStack(): JSX.Element {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen component={SignUp} name='SignUp' />
+      <Stack.Screen component={Login} name='Login' />
     </Stack.Navigator>
   )
 }
