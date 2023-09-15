@@ -1,16 +1,21 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+
+import { InputField } from "../components/Login/InputField";
+import { SubmitButton } from "../components/Login/SubmitButton";
+import { RedirectButton } from "../components/Login/RedirectButton";
+import { SocialMedia } from "../components/Login/SocialMedia";
+import { LoginHeader } from "../components/Login/LoginHeader";
+import { signUp } from "../util/http/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-import { LoginHeader } from "../components/Login/LoginHeader";
-import { InputField } from "../components/Login/InputField";
-import { RedirectButton } from "../components/Login/RedirectButton";
-import { SubmitButton } from "../components/Login/SubmitButton";
-import { Input } from "../types/interfaces/Input";
-import { SocialMedia } from "../components/Login/SocialMedia";
+interface Input {
+    name: string,
+    email: string,
+    password: string
+}
 
-
-export function SignUp({ navigation }: { navigation: any }) {
+export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     const {
         control,
         handleSubmit,
@@ -24,7 +29,7 @@ export function SignUp({ navigation }: { navigation: any }) {
     });
 
     const handleSubmitButton: SubmitHandler<Input> = async (input) => {
-
+        const data = await signUp(input.email, input.password, input.name);
     }
 
     function handleRedirectClick() {
@@ -36,8 +41,8 @@ export function SignUp({ navigation }: { navigation: any }) {
         });
     }
 
-    async function handleGoogleLogin() {}
-    async function handleFacebookLogin() {}
+    async function handleGoogleLogin() {
+    }
 
     return (
         <View style={styles.container}>
@@ -117,13 +122,13 @@ export function SignUp({ navigation }: { navigation: any }) {
                 style={styles.submitButton}
             />
             <SocialMedia
-                title="or a social account"
-                onFacebookPress={handleFacebookLogin}
+                title="or login with social account"
                 onGooglePress={handleGoogleLogin}
             />
         </View>
     )
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
