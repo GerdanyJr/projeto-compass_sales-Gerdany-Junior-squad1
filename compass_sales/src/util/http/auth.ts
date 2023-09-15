@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { app } from './firebaseConfig';
 import { Alert } from "react-native";
 
@@ -18,6 +18,14 @@ export async function signIn(email: string, password: string) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         return userCredential;
+    } catch (error: any) {
+        Alert.alert(`${error.code})}`);
+    }
+}
+
+export async function passwordReset(email: string) {
+    try {
+        await sendPasswordResetEmail(auth, email);
     } catch (error: any) {
         Alert.alert(`${error.code})}`);
     }
