@@ -1,8 +1,14 @@
-import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import * as firebaseAuth from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, initializeAuth } from "firebase/auth";
 import { app } from './firebaseConfig';
 import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const auth = getAuth(app);
+const reactNativePersistence = (firebaseAuth as any).getReactNativePersistence;
+
+export const auth = initializeAuth(app, {
+    persistence: reactNativePersistence(AsyncStorage)
+});
 
 export async function signUp(email: string, password: string, displayName: string) {
     try {
@@ -28,5 +34,13 @@ export async function passwordReset(email: string) {
         await sendPasswordResetEmail(auth, email);
     } catch (error: any) {
         Alert.alert(`${error.code})}`);
+    }
+}
+
+export async function emailPasswordLogout() {
+    try {
+        signOut(auth);
+    } catch (error: any) {
+        Alert.alert(`${error}`);
     }
 }
