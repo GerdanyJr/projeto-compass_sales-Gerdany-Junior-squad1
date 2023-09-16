@@ -8,9 +8,9 @@ import { SocialMedia } from "../components/Login/SocialMedia";
 import { LoginHeader } from "../components/Login/LoginHeader";
 import { signUp } from "../util/http/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { onGoogleButtonPress } from "../util/http/googleAuth";
 
 import { Input } from "../types/interfaces/input";
-import { onGoogleButtonPress } from "../util/http/googleAuth";
 
 export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     const {
