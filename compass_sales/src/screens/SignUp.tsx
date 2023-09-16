@@ -10,6 +10,7 @@ import { signUp } from "../util/http/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { Input } from "../types/interfaces/input";
+import { onGoogleButtonPress } from "../util/http/googleAuth";
 
 export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     const {
@@ -38,6 +39,8 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     }
 
     async function handleGoogleLogin() {
+        const ret = await onGoogleButtonPress();
+        console.log(ret);
     }
 
     return (
