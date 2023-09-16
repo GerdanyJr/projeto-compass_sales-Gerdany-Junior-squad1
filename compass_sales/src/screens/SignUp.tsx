@@ -9,11 +9,7 @@ import { LoginHeader } from "../components/Login/LoginHeader";
 import { signUp } from "../util/http/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-interface Input {
-    name: string,
-    email: string,
-    password: string
-}
+import { Input } from "../types/interfaces/input";
 
 export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     const {
