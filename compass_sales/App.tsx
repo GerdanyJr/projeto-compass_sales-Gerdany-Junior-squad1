@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, StyleSheet, StatusBar, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,6 +7,8 @@ import { Login } from './src/screens/Login';
 import { SignUp } from './src/screens/SignUp';
 import { ForgotPassword } from './src/screens/ForgotPassword';
 import { AuthContext, AuthContextProvider } from './src/store/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Home } from './src/screens/Home';
 
 const Stack = createNativeStackNavigator();
 function App(): JSX.Element {
@@ -22,6 +24,17 @@ function App(): JSX.Element {
 
 function RootStack(): JSX.Element {
   const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    async function getToken() {
+      const storedToken = await AsyncStorage.getItem('token');
+      const user = await AsyncStorage.getItem('user');
+      if (storedToken && user) {
+        authCtx.authenticate(JSON.parse(user), storedToken);
+      }
+    }
+    getToken();
+  }, [])
   return (
     <NavigationContainer>
       {!authCtx.isAuthenticated && <AuthenticateStack />}
@@ -42,9 +55,9 @@ function AuthenticateStack(): JSX.Element {
 
 function AuthenticatedStack(): JSX.Element {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen component={Home} name='Home' />
+    </Stack.Navigator>
   )
 }
 
