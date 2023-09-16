@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 25,
         padding: 14,
-        overflow: 'hidden'
+        overflow: 'hidden',
     },
     buttonText: {
         fontFamily: 'Roboto-Bold',

@@ -15,10 +15,10 @@ export function SocialMedia(props: SocialMediaProps): JSX.Element {
             <View style={[props.style]}>
                 <Text style={styles.socialMediaText}>{props.title}</Text>
                 <View style={styles.logosContainer}>
-                    <Pressable style={styles.logo} onPress={props.onFacebookPress}>
+                    <Pressable style={styles.logo} android_ripple={{ color: 'grey', foreground: true }} onPress={props.onFacebookPress}>
                         <Image source={require('../../assets/Facebook-logo.png')} />
                     </Pressable>
-                    <Pressable style={styles.logo} onPress={props.onGooglePress}>
+                    <Pressable style={styles.logo} android_ripple={{ color: 'grey', foreground: true }} onPress={props.onGooglePress}>
                         <Image source={require('../../assets/Google-logo.png')} />
                     </Pressable>
                 </View>
@@ -49,5 +49,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         borderRadius: 24,
         backgroundColor: 'white',
+        overflow: 'hidden',
+        elevation: 1
     }
 });

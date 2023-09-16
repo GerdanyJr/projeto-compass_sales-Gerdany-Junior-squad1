@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         height: 64,
         paddingTop: 8,
+        elevation: 2
     },
     label: {
         position: 'absolute',
@@ -115,7 +116,8 @@ const styles = StyleSheet.create({
     errorInput: {
         borderColor: Colors.error,
         borderWidth: 1,
-        borderRadius: 4
+        borderRadius: 4,
+        elevation: 0
     },
     errorMessage: {
         color: Colors.error,
