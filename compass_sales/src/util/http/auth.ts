@@ -2,7 +2,7 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmail
 import { app } from './firebaseConfig';
 import { Alert } from "react-native";
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 export async function signUp(email: string, password: string, displayName: string) {
     try {

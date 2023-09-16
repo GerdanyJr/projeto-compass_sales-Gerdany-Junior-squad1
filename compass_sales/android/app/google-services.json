@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "278341264373",
+    "project_id": "compass-sales-40712",
+    "storage_bucket": "compass-sales-40712.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278341264373:android:d1ab6c7c725e044a4f76bc",
+        "android_client_info": {
+          "package_name": "com.compass_sales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278341264373-d1h85ohshtku4bt03ap6055cfk3tia7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.compass_sales",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "278341264373-6gm7nft3fvcv8336uba86mf17v0n5vds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-h9kBJl07narWTCNa8xRSKWRR0S8VtZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278341264373-6gm7nft3fvcv8336uba86mf17v0n5vds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
