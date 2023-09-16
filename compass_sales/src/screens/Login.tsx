@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { InputField } from "../components/Login/InputField";
@@ -9,6 +9,8 @@ import { LoginHeader } from "../components/Login/LoginHeader";
 import { GoBack } from "../components/UI/GoBack";
 import { signIn } from "../util/http/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { AuthContext } from "../store/AuthContext";
+import { onGoogleButtonPress } from "../util/http/googleAuth";
 
 interface LoginInput {
     email: string,
@@ -16,6 +18,7 @@ interface LoginInput {
 }
 
 export function Login({ navigation }: { navigation: any }): JSX.Element {
+    const authCtx = useContext(AuthContext);
     const {
         control,
         handleSubmit,
@@ -38,8 +41,21 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
     }
 
     const handleSubmitButton: SubmitHandler<LoginInput> = async (input) => {
-        const data = await signIn(input.email, input.password);
+        const response = await signIn(input.email, input.password);
+        if (response) {
+            const token = await response.user.getIdToken();
+            authCtx.authenticate(response.user, token);
+        }
     }
+
+    async function handleGoogleLogin() {
+        const response = await onGoogleButtonPress();
+        if (response) {
+            const token = await response.user.getIdToken();
+            authCtx.authenticate(response.user, token);
+        }
+    }
+
     return (
         <View style={styles.container}>
             <GoBack style={styles.goBackButton} />
@@ -100,6 +116,7 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
             />
             <SocialMedia
                 title="or login with social account"
+                onGooglePress={handleGoogleLogin}
             />
         </View>
     )

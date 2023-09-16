@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { InputField } from "../components/Login/InputField";
@@ -11,8 +11,10 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { onGoogleButtonPress } from "../util/http/googleAuth";
 
 import { Input } from "../types/interfaces/input";
+import { AuthContext } from "../store/AuthContext";
 
 export function SignUp({ navigation }: { navigation: any }): JSX.Element {
+    const authCtx = useContext(AuthContext);
     const {
         control,
         handleSubmit,
@@ -26,7 +28,11 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     });
 
     const handleSubmitButton: SubmitHandler<Input> = async (input) => {
-        const data = await signUp(input.email, input.password, input.name);
+        const response = await signUp(input.email, input.password, input.name);
+        if (response) {
+            const token = await response.getIdToken();
+            authCtx.authenticate(response, token);
+        }
     }
 
     function handleRedirectClick() {
@@ -39,8 +45,11 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     }
 
     async function handleGoogleLogin() {
-        const ret = await onGoogleButtonPress();
-        console.log(ret);
+        const response = await onGoogleButtonPress();
+        if (response) {
+            const token = await response.user.getIdToken();
+            authCtx.authenticate(response.user, token);
+        }
     }
 
     return (
