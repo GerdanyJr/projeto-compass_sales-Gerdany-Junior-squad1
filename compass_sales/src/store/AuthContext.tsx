@@ -1,11 +1,13 @@
 import React, { ReactNode, createContext, useState } from "react";
 import { User } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { emailPasswordLogout } from "../util/http/auth";
 
 export const AuthContext = createContext({
     token: '',
     user: null as User | null,
     isAuthenticated: false,
-    authenticate: (token: string) => { },
+    authenticate: (user: User, token: string) => { },
     logout: () => { }
 });
 
@@ -17,15 +19,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const [token, setToken] = useState<string>('');
     const [user, setUser] = useState<User | null>(null);
 
-    function authenticate(response: any) {
-        setToken(response.idToken);
-        setUser(response);
+    function authenticate(user: User, token: string) {
+        setToken(token);
+        setUser(user);
+        AsyncStorage.setItem('token', token);
+        AsyncStorage.setItem('user', JSON.stringify(user));
     }
 
     function logout() {
         setToken('');
-        logout();
         setUser(null);
+        AsyncStorage.removeItem('token');
+        AsyncStorage.removeItem('user');
+        emailPasswordLogout();
     }
 
     const value = {
