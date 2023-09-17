@@ -12,6 +12,7 @@ import { onGoogleButtonPress } from "../util/http/googleAuth";
 
 import { Input } from "../types/interfaces/input";
 import { AuthContext } from "../store/AuthContext";
+import { onFacebookButtonPress } from "../util/http/facebookAuth";
 
 export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     const authCtx = useContext(AuthContext);
@@ -46,6 +47,14 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
 
     async function handleGoogleLogin() {
         const response = await onGoogleButtonPress();
+        if (response) {
+            const token = await response.user.getIdToken();
+            authCtx.authenticate(response.user, token);
+        }
+    }
+
+    async function handleFacebookLogin() {
+        const response = await onFacebookButtonPress();
         if (response) {
             const token = await response.user.getIdToken();
             authCtx.authenticate(response.user, token);
@@ -130,8 +139,9 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
                 style={styles.submitButton}
             />
             <SocialMedia
-                title="or login with social account"
+                title="or sign up with social account"
                 onGooglePress={handleGoogleLogin}
+                onFacebookPress={handleFacebookLogin}
             />
         </View>
     )

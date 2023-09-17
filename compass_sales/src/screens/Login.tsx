@@ -11,6 +11,7 @@ import { signIn } from "../util/http/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AuthContext } from "../store/AuthContext";
 import { onGoogleButtonPress } from "../util/http/googleAuth";
+import { onFacebookButtonPress } from "../util/http/facebookAuth";
 
 interface LoginInput {
     email: string,
@@ -55,6 +56,15 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
             authCtx.authenticate(response.user, token);
         }
     }
+    
+    async function handleFacebookLogin() {
+        const response = await onFacebookButtonPress();
+        if (response) {
+            const token = await response.user.getIdToken();
+            authCtx.authenticate(response.user, token);
+        }
+    }
+
 
     return (
         <View style={styles.container}>
@@ -117,6 +127,7 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
             <SocialMedia
                 title="or login with social account"
                 onGooglePress={handleGoogleLogin}
+                onFacebookPress={handleFacebookLogin}
             />
         </View>
     )
