@@ -33,7 +33,9 @@ export function ForgotPassword({ navigation }: { navigation: any }): JSX.Element
 
     return (
         <View style={styles.container}>
-            <GoBack style={styles.goBackButton} />
+            <GoBack style={styles.goBackButton}
+                onPress={() => navigation.navigate('Login')}
+            />
             <LoginHeader title="Forgot password" />
             <View style={styles.inputContainer}>
                 <Text style={styles.instructionText}>

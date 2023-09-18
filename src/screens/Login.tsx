@@ -50,9 +50,9 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
         if (response) {
             const token = await response.user.getIdToken();
             authCtx.authenticate(response.user, token);
+            resetFields();
         }
         setIsLoading(false);
-        resetFields();
     }
 
     async function handleGoogleLogin() {
@@ -78,7 +78,9 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
 
     return (
         <View style={styles.container}>
-            <GoBack style={styles.goBackButton} />
+            <GoBack style={styles.goBackButton}
+                    onPress={() => navigation.navigate('SignUp')}
+             />
             <LoginHeader title="Login" />
             <View style={styles.inputContainer}>
                 <Controller
@@ -107,7 +109,7 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
                     defaultValue=""
                     rules={{
                         required: true,
-                        minLength: 4,
+                        minLength: 6,
                     }}
                     render={({ field, fieldState, formState }) => (
                         <InputField
