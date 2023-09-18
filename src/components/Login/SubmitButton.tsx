@@ -13,6 +13,7 @@ interface SubmitButton {
 export function SubmitButton(props: SubmitButton): JSX.Element {
     return (
         <Pressable style={[styles.buttonContainer, props.style]}
+            disabled={props.isLoading}
             onPress={props.onPress}
             android_ripple={{ color: '#C62000', foreground: true }}>
             {props.isLoading ?

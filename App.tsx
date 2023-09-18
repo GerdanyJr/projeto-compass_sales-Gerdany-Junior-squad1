@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, Text } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -15,7 +15,7 @@ function App(): JSX.Element {
   return (
     <AuthContextProvider>
       <View style={styles.container}>
-        <StatusBar barStyle={'light-content'} />
+        <StatusBar barStyle='dark-content' backgroundColor='#F9F9F9' />
         <RootStack />
       </View>
     </AuthContextProvider>
@@ -34,7 +34,7 @@ function RootStack(): JSX.Element {
       }
     }
     getToken();
-  }, [])
+  }, []);
   return (
     <NavigationContainer>
       {!authCtx.isAuthenticated && <AuthenticateStack />}
@@ -44,13 +44,25 @@ function RootStack(): JSX.Element {
 }
 
 function AuthenticateStack(): JSX.Element {
+  const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    async function checkIsFirstTime() {
+      const storedIsFirstTime = await AsyncStorage.getItem('isFirstTime');
+      if (storedIsFirstTime) {
+        authCtx.setIsFirstTime(JSON.parse(storedIsFirstTime));
+      }
+    }
+    checkIsFirstTime();
+  }, []);
+
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={authCtx.isFirstTime ? 'SignUp' : 'Login'}>
       <Stack.Screen component={SignUp} name='SignUp' />
       <Stack.Screen component={Login} name='Login' />
       <Stack.Screen component={ForgotPassword} name='ForgotPassword' />
     </Stack.Navigator>
-  )
+  );
 }
 
 function AuthenticatedStack(): JSX.Element {
