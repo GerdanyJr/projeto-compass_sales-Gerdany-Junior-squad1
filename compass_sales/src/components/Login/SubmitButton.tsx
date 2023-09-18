@@ -16,7 +16,7 @@ export function SubmitButton(props: SubmitButton): JSX.Element {
             onPress={props.onPress}
             android_ripple={{ color: '#C62000', foreground: true }}>
             {props.isLoading ?
-                <ActivityIndicator color='white'  /> :
+                <ActivityIndicator color='white' size={16} /> :
                 <Text style={styles.buttonText}>{props.title}</Text>
             }
         </Pressable>
