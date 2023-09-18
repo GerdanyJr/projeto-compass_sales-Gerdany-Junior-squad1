@@ -1,79 +1,62 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Compass Sales
 
-# Getting Started
+This project serves as an example application developed as part of the Compass UOL scholarship program. Its primary objective is to consolidate the knowledge acquired during the first 8 weeks of studying React Native. The application demonstrates a complete user authentication flow, including login, registration, and password recovery.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+- **Login**: Users can securely log in using their email address and password.
+- **Registration**: The registration process allows new users to create an account by providing their name, email address, and password.
+- **Password Recovery**: Users can initiate a password reset by providing their email address, receiving a link via email to reset their password.
+- **Social Media Login**: The app supports social media logins, allowing users to sign in using their Google or Facebook accounts.
+- **Welcome Screen**: After a successful login, users are greeted with a personalized welcome screen that displays their name. They also have the option to log out.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Used Libraries
 
-To start Metro, run the following command from the _root_ of your React Native project:
+This project utilizes the following libraries and technologies:
 
-```bash
-# using npm
-npm start
+- [React Native](https://reactnative.dev/): React Native is a popular JavaScript framework for building natively-rendered mobile applications for both iOS and Android platforms. It enables developers to create mobile apps with a native look and feel while using React.
+- [React Navigation](https://reactnavigation.org/): React Navigation is a highly regarded navigation library for React Native applications. It simplifies navigation and routing, offering features like stack navigation, tab navigation, and drawer navigation.
+- [React Hook Form](https://react-hook-form.com/): React Hook Form is a library designed for managing forms and form validations in React applications. It streamlines form handling by utilizing React hooks, making form state and validation rules easy to manage.
+- [Firebase](https://firebase.google.com/): Firebase is a comprehensive platform for developing web and mobile applications. In this project, Firebase is employed for user authentication, providing a secure and scalable authentication system. Users can sign in using email and password, Google, or Facebook accounts.
+- [React Native FBSDK Next](https://github.com/thebergamo/react-native-fbsdk-next): React Native FBSDK is a wrapper around the iOS Facebook SDK and Android Facebook SDK, allowing for Facebook integration in React Native apps. Access to native components, from login to sharing, is provided entirely through documented JavaScript modules so you don't have to call a single native function directly.
+- [React Native Google Sign In](https://github.com/react-native-google-signin/google-signin): The "react-native-google-signin" library is a popular library for integrating Google Sign-In functionality into React Native applications. It allows users to log in to your app using their Google accounts, which can enhance the user experience by simplifying the login process and providing access to user data from Google services.
 
-# OR using Yarn
-yarn start
-```
+## Installation and Running
 
-## Step 2: Start your Application
+To set up and run the project, follow these steps:
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+1. Clone the repository:
 
-### For Android
+   ```bash
+   git clone git@github.com:GerdanyJr/projeto-compass_sales-Gerdany-Junior-squad1.git
+   ```
+2. Install project dependencies:
 
-```bash
-# using npm
-npm run android
+    ```bash
+    npm install
+   ```
+3. Inicie o servidor de desenvolvimento:
 
-# OR using Yarn
-yarn android
-```
+    ```bash
+    npm start
+   ```
+4. Para executar o aplicativo em um emulador ou dispositivo físico:
 
-### For iOS
+    ```bash
+    npm run android
+    ```
+## Credits
 
-```bash
-# using npm
-npm run ios
+The design of the design of this project is credited to Compass UOL as part of the Compass UOL scholarship program.
 
-# OR using Yarn
-yarn ios
-```
+## Acknowledgments
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+This project was made possible by the Compass UOL Scholarship Program. We would like to express our deep gratitude to the instructors and mentors who played a crucial role in our learning journey:
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+* **Jardel Bordignom**
+* **Thiago Schweder**
+* **Julianne Valiati**
+* **Liliv Hana Vasconcelos**
+* **Rafael Nascimento Colares**: I would like to extend a special thank you to Rafael Nascimento Colares for his exceptional attentiveness and unwavering support. His dedication in addressing all our queries and concerns has been invaluable.
 
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Their guidance and expertise have been instrumental in our development, and we are truly thankful for their contributions to our success.
