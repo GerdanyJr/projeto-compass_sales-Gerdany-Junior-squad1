@@ -51,7 +51,7 @@ The design of the design of this project is credited to Compass UOL as part of t
 
 ## Acknowledgments
 
-This project was made possible by the Compass UOL Scholarship Program. We would like to express our deep gratitude to the instructors and mentors who played a crucial role in our learning journey:
+This project was made possible by the Compass UOL Scholarship Program. I would like to express our deep gratitude to the instructors and mentors who played a crucial role in our learning journey:
 
 * **Jardel Bordignom**
 * **Thiago Schweder**
