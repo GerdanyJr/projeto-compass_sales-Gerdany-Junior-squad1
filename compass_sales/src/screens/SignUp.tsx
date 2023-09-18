@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { InputField } from "../components/Login/InputField";
@@ -15,6 +15,7 @@ import { AuthContext } from "../store/AuthContext";
 import { onFacebookButtonPress } from "../util/http/facebookAuth";
 
 export function SignUp({ navigation }: { navigation: any }): JSX.Element {
+    const [isLoading, setIsLoading] = useState(false);
     const authCtx = useContext(AuthContext);
     const {
         control,
@@ -28,16 +29,7 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
         },
     });
 
-    const handleSubmitButton: SubmitHandler<Input> = async (input) => {
-        const response = await signUp(input.email, input.password, input.name);
-        if (response) {
-            const token = await response.getIdToken();
-            authCtx.authenticate(response, token);
-        }
-    }
-
-    function handleRedirectClick() {
-        navigation.navigate('Login');
+    function resetFields() {
         reset({
             name: "",
             email: "",
@@ -45,20 +37,38 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
         });
     }
 
+    const handleSubmitButton: SubmitHandler<Input> = async (input) => {
+        setIsLoading(true);
+        const response = await signUp(input.email, input.password, input.name);
+        if (response) {
+            navigation.navigate('Login');
+        }
+        setIsLoading(false);
+    }
+
+    function handleRedirectClick() {
+        navigation.navigate('Login');
+        resetFields();
+    }
+
     async function handleGoogleLogin() {
+        setIsLoading(true);
         const response = await onGoogleButtonPress();
         if (response) {
             const token = await response.user.getIdToken();
             authCtx.authenticate(response.user, token);
         }
+        setIsLoading(false);
     }
 
     async function handleFacebookLogin() {
+        setIsLoading(true);
         const response = await onFacebookButtonPress();
         if (response) {
             const token = await response.user.getIdToken();
             authCtx.authenticate(response.user, token);
         }
+        setIsLoading(false);
     }
 
     return (
@@ -136,6 +146,7 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
             <SubmitButton
                 title="Sign up"
                 onPress={handleSubmit(handleSubmitButton)}
+                isLoading={isLoading}
                 style={styles.submitButton}
             />
             <SocialMedia

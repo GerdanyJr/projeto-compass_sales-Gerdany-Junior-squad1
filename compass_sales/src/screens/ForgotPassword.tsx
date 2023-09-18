@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { InputField } from "../components/Login/InputField";
@@ -14,6 +14,7 @@ interface ForgotPassword {
 }
 
 export function ForgotPassword({ navigation }: { navigation: any }): JSX.Element {
+    const [isLoading, setIsLoading] = useState(false);
     const {
         control,
         handleSubmit
@@ -24,7 +25,10 @@ export function ForgotPassword({ navigation }: { navigation: any }): JSX.Element
     });
 
     const handleSubmitButton: SubmitHandler<ForgotPassword> = async (input) => {
+        setIsLoading(true);
         await passwordReset(input.email);
+        setIsLoading(false);
+        navigation.navigate("Login");
     }
 
     return (
@@ -60,6 +64,7 @@ export function ForgotPassword({ navigation }: { navigation: any }): JSX.Element
                 title="Send"
                 onPress={handleSubmit(handleSubmitButton)}
                 style={styles.submitButton}
+                isLoading={isLoading}
             />
         </View>
     )

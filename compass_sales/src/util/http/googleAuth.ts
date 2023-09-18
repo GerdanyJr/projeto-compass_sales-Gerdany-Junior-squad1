@@ -1,6 +1,6 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { auth } from './auth';
-import { GoogleAuthProvider, linkWithCredential, signInWithCredential } from "firebase/auth";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 
 GoogleSignin.configure({
     webClientId: '278341264373-6gm7nft3fvcv8336uba86mf17v0n5vds.apps.googleusercontent.com',
