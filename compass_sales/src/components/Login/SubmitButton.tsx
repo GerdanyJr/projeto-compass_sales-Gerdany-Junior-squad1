@@ -1,11 +1,12 @@
 import React from "react";
 
-import { Pressable, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
 import { Colors } from "../../util/Colors";
 
 interface SubmitButton {
     title: string,
     onPress?: (...args: any) => void,
+    isLoading?: boolean,
     style?: any
 }
 
@@ -14,7 +15,10 @@ export function SubmitButton(props: SubmitButton): JSX.Element {
         <Pressable style={[styles.buttonContainer, props.style]}
             onPress={props.onPress}
             android_ripple={{ color: '#C62000', foreground: true }}>
-            <Text style={styles.buttonText}>{props.title}</Text>
+            {props.isLoading ?
+                <ActivityIndicator color='white'  /> :
+                <Text style={styles.buttonText}>{props.title}</Text>
+            }
         </Pressable>
     )
 }
