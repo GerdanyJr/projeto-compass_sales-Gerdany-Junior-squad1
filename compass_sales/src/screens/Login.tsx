@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { InputField } from "../components/Login/InputField";
@@ -19,6 +19,7 @@ interface LoginInput {
 }
 
 export function Login({ navigation }: { navigation: any }): JSX.Element {
+    const [isLoading, setIsLoading] = useState(false);
     const authCtx = useContext(AuthContext);
     const {
         control,
@@ -26,43 +27,52 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
         reset
     } = useForm({
         defaultValues: {
-            name: "",
             email: "",
             password: ""
         }
     });
 
-    function handleRedirectClick() {
-        navigation.navigate('ForgotPassword');
+    function resetFields() {
         reset({
-            name: "",
             email: "",
             password: ""
         });
     }
 
+    function handleRedirectClick() {
+        navigation.navigate('ForgotPassword');
+        resetFields();
+    }
+
     const handleSubmitButton: SubmitHandler<LoginInput> = async (input) => {
+        setIsLoading(true);
         const response = await signIn(input.email, input.password);
         if (response) {
             const token = await response.user.getIdToken();
             authCtx.authenticate(response.user, token);
         }
+        setIsLoading(false);
+        resetFields();
     }
 
     async function handleGoogleLogin() {
+        setIsLoading(true);
         const response = await onGoogleButtonPress();
         if (response) {
             const token = await response.user.getIdToken();
             authCtx.authenticate(response.user, token);
         }
+        setIsLoading(false);
     }
-    
+
     async function handleFacebookLogin() {
+        setIsLoading(true);
         const response = await onFacebookButtonPress();
         if (response) {
             const token = await response.user.getIdToken();
             authCtx.authenticate(response.user, token);
         }
+        setIsLoading(false);
     }
 
 
@@ -123,6 +133,7 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
                 title="Login"
                 onPress={handleSubmit(handleSubmitButton)}
                 style={styles.submitButton}
+                isLoading={isLoading}
             />
             <SocialMedia
                 title="or login with social account"

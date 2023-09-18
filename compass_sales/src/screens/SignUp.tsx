@@ -29,6 +29,14 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
         },
     });
 
+    function resetFields() {
+        reset({
+            name: "",
+            email: "",
+            password: ""
+        });
+    }
+
     const handleSubmitButton: SubmitHandler<Input> = async (input) => {
         setIsLoading(true);
         const response = await signUp(input.email, input.password, input.name);
@@ -40,11 +48,7 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
 
     function handleRedirectClick() {
         navigation.navigate('Login');
-        reset({
-            name: "",
-            email: "",
-            password: ""
-        });
+        resetFields();
     }
 
     async function handleGoogleLogin() {
