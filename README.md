@@ -35,12 +35,12 @@ To set up and run the project, follow these steps:
     ```bash
     npm install
    ```
-3. Inicie o servidor de desenvolvimento:
+3. Start the development server:
 
     ```bash
     npm start
    ```
-4. Para executar o aplicativo em um emulador ou dispositivo físico:
+4. To execute the app on a physical device: 
 
     ```bash
     npm run android
