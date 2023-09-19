@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     },
     errorMessage: {
         color: Colors.error,
-        textAlign: 'center',
+        paddingHorizontal: 16,
         fontSize: 12,
         fontFamily: 'Roboto-Medium',
         marginBottom: 4
